@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Asem Ashraf — GIS & Remote Sensing</title>
+  <meta name="description" content="Asem Ashraf — GIS specialist and full-stack developer. Digital mapping, remote sensing, geospatial analysis and web GIS applications.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="HTML_1.css?v=2">
+
+  <!-- Leaflet (used by the interactive route map at the bottom of the page) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+<body>
+
+<!-- background layers: starfield + orbit rings (pure CSS, no images) -->
+<div class="space-bg" aria-hidden="true">
+  <div class="stars stars-1"></div>
+  <div class="stars stars-2"></div>
+  <div class="stars stars-3"></div>
+</div>
+
+<!-- =========================================================
+     Navigation
+     ========================================================= -->
+<nav class="menu">
+  <div id="logo">
+    <img src="logo.png" alt="Asem Ashraf logo">
+    <span style="color:var(--teal);">Asem</span><span>&nbsp;Ashraf</span>
+  </div>
+
+  <div class="menu-toggle" id="menuToggle" role="button" aria-label="Toggle menu" tabindex="0">&#9776;</div>
+
+  <ul id="rmenu">
+    <li><a class="menu-item" href="#hero">Home</a></li>
+    <li>
+      <a class="menu-item" href="#gis-applications">Applications</a>
+      <div class="sup-contant">
+        <div class="sup-drop">
+          <ul>
+            <li><a href="#gis-applications">// 01 — Natural resources</a></li>
+            <li><a href="#gis-applications">// 02 — Urban planning</a></li>
+            <li><a href="#gis-applications">// 03 — Disaster response</a></li>
+            <li><a href="#gis-applications">// 04 — Smart agriculture</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a class="menu-item" href="#developers">Stack</a>
+      <div class="sup-contant">
+        <div class="sup-drop">
+          <ul>
+            <li><a href="#developers">// GIS scripting</a></li>
+            <li><a href="#developers">// Web development</a></li>
+            <li><a href="#developers">// Field apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a class="menu-item" href="#map-section">Routing</a>
+      <div class="sup-contant">
+        <div class="sup-drop">
+          <ul>
+            <li><a href="#map-section">// Shortest route</a></li>
+            <li><a href="#tools-section">// GIS tools</a></li>
+            <li><a href="#quiz-section">// GIS quiz</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li><a class="menu-item" href="#gis-overlay">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- =========================================================
+     Hero
+     ========================================================= -->
+<div class="Container">
+  <div class="frame">
+    <section class="my" id="hero">
+      <div class="overlay-text">
+        <h1><span class="accent">Hello</span>, World</h1>
+        <p class="tagline">The&nbsp;&nbsp;Science&nbsp;&nbsp;of&nbsp;&nbsp;Where</p>
+      </div>
+
+      <!-- rotating globe: pure CSS/CSS-animation, no JS or WebGL needed -->
+      <div class="globe-wrap" aria-hidden="true">
+        <div class="globe-ring"></div>
+        <div class="globe-ring globe-ring-2"></div>
+        <div class="globe-sat"></div>
+        <div class="globe">
+          <div class="globe-texture"></div>
+          <div class="globe-shading"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<main>
+  <article>
+
+    <!-- =========================================================
+         GIS applications + card carousel
+         ========================================================= -->
+    <section class="gis-section" id="gis-applications">
+      <div class="section-heading">
+        <span class="eyebrow">// applications</span>
+        <h2>Where GIS Makes the Difference</h2>
+      </div>
+
+      <div class="main-text">
+        GIS has turned agriculture into a data-driven science, enabling real-time crop monitoring, weather and
+        soil analysis, and precision farming with satellite imagery, drones, and IoT — reducing waste, boosting
+        yields, and ensuring sustainability.
+      </div>
+
+      <div class="carousel">
+        <div class="cards-container" id="cardsContainer">
+          <div class="card">
+            <img src="ChatGPT Image Aug 9, 2025, 03_08_02 PM.png" alt="Natural resource monitoring map">
+            <h3>Natural Resource Management</h3>
+            <p>GIS technologies are used to monitor and assess natural resources such as water, forests, and mines — mapping utilization areas, identifying optimal investment sites, and monitoring sustainable use.</p>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Aerial view of a planned city grid">
+            <h3>Urban & Municipal Planning</h3>
+            <p>GIS supports urban development plans by analyzing population, roads, and public facilities — helping manage growth, traffic organization, and services like water and electricity.</p>
+          </div>
+          <div class="card">
+            <img src="agriculture-precision-coronavirus.png" alt="Emergency response map overlay">
+            <h3>Disaster & Emergency Management</h3>
+            <p>GIS is applied in tracking natural disasters such as earthquakes, floods, and storms — providing hazard maps that help emergency teams coordinate and deliver aid efficiently.</p>
+          </div>
+          <div class="card">
+            <img src="171013536065ee9840474b2.png" alt="Precision agriculture field data">
+            <h3>Smart Agriculture</h3>
+            <p>In agriculture, GIS is used to analyze soil, monitor crops, and determine the best farming practices for a region — improving productivity and managing resources effectively.</p>
+          </div>
+          <!-- duplicated set for a seamless infinite scroll -->
+          <div class="card" aria-hidden="true">
+            <img src="ChatGPT Image Aug 9, 2025, 03_08_02 PM.png" alt="">
+            <h3>Natural Resource Management</h3>
+            <p>GIS technologies are used to monitor and assess natural resources such as water, forests, and mines — mapping utilization areas, identifying optimal investment sites, and monitoring sustainable use.</p>
+          </div>
+          <div class="card" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="">
+            <h3>Urban & Municipal Planning</h3>
+            <p>GIS supports urban development plans by analyzing population, roads, and public facilities — helping manage growth, traffic organization, and services like water and electricity.</p>
+          </div>
+          <div class="card" aria-hidden="true">
+            <img src="agriculture-precision-coronavirus.png" alt="">
+            <h3>Disaster & Emergency Management</h3>
+            <p>GIS is applied in tracking natural disasters such as earthquakes, floods, and storms — providing hazard maps that help emergency teams coordinate and deliver aid efficiently.</p>
+          </div>
+          <div class="card" aria-hidden="true">
+            <img src="171013536065ee9840474b2.png" alt="">
+            <h3>Smart Agriculture</h3>
+            <p>In agriculture, GIS is used to analyze soil, monitor crops, and determine the best farming practices for a region — improving productivity and managing resources effectively.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           CV / typewriter / contact
+           ========================================================= -->
+      <div class="gis-overlay" id="gis-overlay">
+        <button class="cv" type="button" onclick="window.open('cv.pdf', '_blank')">Download my CV</button>
+
+        <div class="typewriter-container" id="typewriter">
+          <span id="typed-text"></span>
+        </div>
+
+        <div class="rr">Contact Me</div>
+        <div class="icon3">
+          <a href="https://www.linkedin.com/in/asem-ashraf-7ba5791ab/" target="_blank" rel="noopener"><img src="linked.png" alt="LinkedIn"></a>
+          <a href="https://wa.me/+201027400764" target="_blank" rel="noopener"><img src="whatsapp.png" alt="WhatsApp"></a>
+          <a href="mailto:asemashraf133@gmail.com"><img src="gmail.png" alt="Email"></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="contour-divider" aria-hidden="true"></div>
+
+    <!-- =========================================================
+         Developers section
+         ========================================================= -->
+    <section class="gis-section2" id="developers">
+      <div class="gis-overlay2">
+        <span class="eyebrow">// stack</span>
+        <h2>Developers</h2>
+        <p>
+          Programmers need to be focused because you're going to be writing, examining, and error-checking code.
+          GIS developers need to learn fast on their feet. GIS programming skills like learning
+          <span>Python, .NET, and C++</span> are essential. Alternatively, you could be building web applications
+          using <span>JavaScript, HTML, and CSS</span>. There is also potential to design geospatial applications
+          for field collection, reporting, and other GIS-related activities.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         Interactive route map
+         ========================================================= -->
+    <section class="map-section" id="map-section">
+      <div class="section-heading">
+        <span class="eyebrow">// 30.0444° N, 31.2357° E</span>
+        <h2>Find the Shortest Route</h2>
+      </div>
+      <p class="map-hint">Click a start point, then a destination, to draw the shortest route between them.</p>
+      <div class="mode-switch">
+        <button type="button" class="active" id="modeCar" onclick="setTravelMode('car')">🚗 Driving</button>
+        <button type="button" id="modeFoot" onclick="setTravelMode('foot')">🚶 Walking</button>
+      </div>
+      <div id="map"></div>
+    </section>
+
+    <!-- =========================================================
+         Online GIS mini-tools
+         ========================================================= -->
+    <section class="tools-section" id="tools-section">
+      <div class="section-heading">
+        <span class="eyebrow">// online tools</span>
+        <h2>GIS Mini-Tools</h2>
+      </div>
+      <p class="map-hint">Small geospatial utilities, calculated live in your browser — no server round-trip.</p>
+
+      <div class="tools-grid">
+
+        <!-- DD <-> DMS coordinate converter -->
+        <div class="tool-card">
+          <h3>📍 Coordinate Converter</h3>
+          <p class="tool-desc">Decimal Degrees ⇄ Degrees/Minutes/Seconds</p>
+
+          <div class="tool-row">
+            <label for="ddLat">Latitude (DD)</label>
+            <input type="text" id="ddLat" placeholder="e.g. 30.0444">
+          </div>
+          <div class="tool-row">
+            <label for="ddLon">Longitude (DD)</label>
+            <input type="text" id="ddLon" placeholder="e.g. 31.2357">
+          </div>
+          <button type="button" onclick="convertDDtoDMS()">Convert to DMS</button>
+          <div class="tool-output" id="dmsOutput"></div>
+
+          <div class="tool-divider"></div>
+
+          <div class="tool-row">
+            <label for="dmsLat">Latitude (DMS)</label>
+            <input type="text" id="dmsLat" placeholder="e.g. 30°02'39.8&quot;N">
+          </div>
+          <div class="tool-row">
+            <label for="dmsLon">Longitude (DMS)</label>
+            <input type="text" id="dmsLon" placeholder="e.g. 31°14'08.5&quot;E">
+          </div>
+          <button type="button" onclick="convertDMStoDD()">Convert to DD</button>
+          <div class="tool-output" id="ddOutput"></div>
+        </div>
+
+        <!-- UTM zone finder -->
+        <div class="tool-card">
+          <h3>🛰️ UTM Zone Finder</h3>
+          <p class="tool-desc">Find the UTM zone and EPSG code for any lat/lon</p>
+
+          <div class="tool-row">
+            <label for="utmLat">Latitude</label>
+            <input type="text" id="utmLat" placeholder="e.g. 30.0444">
+          </div>
+          <div class="tool-row">
+            <label for="utmLon">Longitude</label>
+            <input type="text" id="utmLon" placeholder="e.g. 31.2357">
+          </div>
+          <button type="button" onclick="findUTMZone()">Find Zone</button>
+          <div class="tool-output" id="utmOutput"></div>
+        </div>
+
+        <!-- Haversine distance calculator -->
+        <div class="tool-card">
+          <h3>📏 Distance Calculator</h3>
+          <p class="tool-desc">Great-circle distance between two points (Haversine)</p>
+
+          <div class="tool-row two-col">
+            <input type="text" id="distLat1" placeholder="Lat 1">
+            <input type="text" id="distLon1" placeholder="Lon 1">
+          </div>
+          <div class="tool-row two-col">
+            <input type="text" id="distLat2" placeholder="Lat 2">
+            <input type="text" id="distLon2" placeholder="Lon 2">
+          </div>
+          <button type="button" onclick="calcDistance()">Calculate</button>
+          <div class="tool-output" id="distOutput"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         GIS quiz
+         ========================================================= -->
+    <section class="quiz-container" id="quiz-section">
+      <h2>🗺️ GIS Quiz</h2>
+
+      <div id="startScreen">
+        <p class="name-label">Enter your name to start:</p>
+        <div class="name-box">
+          <input type="text" id="username" placeholder="Your name">
+          <button type="button" onclick="startQuiz()">🚀 Start</button>
+        </div>
+      </div>
+
+      <div id="quiz" style="display:none;">
+        <p class="question" id="question"></p>
+        <div class="options" id="options"></div>
+        <button type="button" onclick="submitAnswer()">Submit</button>
+        <p class="feedback" id="feedback"></p>
+        <button type="button" onclick="nextQuestion()" id="nextBtn" style="display:none;">Next ➡️</button>
+      </div>
+
+      <p class="result" id="result"></p>
+    </section>
+
+  </article>
+</main>
+
+<!-- =========================================================
+     Chatbot / "ask me anything" widget
+     ========================================================= -->
+<button class="chatbot-btn" type="button" onclick="openDialog()" aria-label="Open chat assistant">💬</button>
+
+<div id="dialog-overlay" class="dialog-overlay">
+  <div class="dialog-box">
+    <button class="close-btn" type="button" onclick="closeDialog()" aria-label="Close chat">✖️</button>
+    <div class="chat-tabs">
+      <button type="button" class="chat-tab active" id="tabAI" onclick="switchChatTab('ai')">🤖 اسأل الذكاء الاصطناعي</button>
+      <button type="button" class="chat-tab" id="tabHuman" onclick="switchChatTab('human')">🧑‍💻 كلّم عاصم</button>
+    </div>
+
+    <!-- AI mode -->
+    <div id="paneAI" class="chat-pane">
+      <div class="chat-log" id="aiLog"></div>
+      <textarea id="aiInput" placeholder="اسأل عن أي حاجة في الـ GIS أو استفسر عن خبرة عاصم..." rows="2"></textarea>
+      <button type="button" id="aiSendBtn" onclick="askAI()">إرسال للذكاء الاصطناعي</button>
+      <p class="chat-note">إجابة تلقائية فورية — لو محتاج رد شخصي من عاصم نفسه، بدّل لتاب "كلّم عاصم".</p>
+    </div>
+
+    <!-- Human live-chat mode -->
+    <div id="paneHuman" class="chat-pane" style="display:none;">
+      <div class="chat-log" id="humanLog"></div>
+      <div class="tool-row">
+        <input type="text" id="humanName" placeholder="اسمك (يظهر لعاصم بس)">
+      </div>
+      <textarea id="humanInput" placeholder="اكتب رسالتك لعاصم هنا..." rows="2"></textarea>
+      <button type="button" id="humanSendBtn" onclick="sendHumanMessage()">إرسال</button>
+      <p class="chat-note" id="humanStatus">هتوصل الرسالة لعاصم مباشرة، وهيردّ عليك هنا لايف — المحادثة دي خاصة بيك انت بس.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © Asem 2025 — All rights reserved
+</footer>
+
+<!-- =========================================================
+     Mobile menu toggle
+     ========================================================= -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const rmenu = document.getElementById('rmenu');
+    if (menuToggle && rmenu) {
+      menuToggle.addEventListener('click', () => rmenu.classList.toggle('show'));
+      menuToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') rmenu.classList.toggle('show');
+      });
+    }
+  });
+</script>
+
+<!-- =========================================================
+     Hero tap-to-zoom (touch devices) — desktop/hover-capable only.
+     On touch screens this used to fire on every tap anywhere on
+     the page and toggle the hero zoom, which is also what was
+     quietly keeping :hover-based pause rules "stuck" elsewhere
+     on the page (see the pointer:fine guards in the CSS).
+     ========================================================= -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mySection = document.querySelector('.my');
+    if (!mySection) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    mySection.addEventListener('touchstart', () => mySection.classList.add('zoomed'));
+    document.addEventListener('touchstart', (e) => {
+      if (!mySection.contains(e.target)) mySection.classList.remove('zoomed');
+    });
+  });
+</script>
+
+<!-- =========================================================
+     Card reveal + typewriter tagline
+     ========================================================= -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Reveal carousel cards. On mobile, waiting on scroll-intersection
+    // was leaving mid-carousel cards stuck at opacity:0 forever because
+    // the carousel keeps sliding horizontally while the card is only
+    // ever briefly, partially on-screen — so we just fade everything
+    // in shortly after load instead of gating it on IntersectionObserver.
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.add('show'), 120 + i * 60);
+    });
+
+    // Typewriter effect for the tagline under the CV button
+    const text = 'See how I combine maps, code, and smart solutions';
+    const el = document.getElementById('typed-text');
+    let index = 0;
+    let started = false;
+
+    function typeWriter() {
+      if (index < text.length) {
+        el.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+
+    function startIfVisible() {
+      if (started || !el) return;
+      const rect = el.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const visible = rect.top < viewportHeight && rect.bottom > 0;
+      if (visible) {
+        started = true;
+        typeWriter();
+      }
+    }
+
+    window.addEventListener('scroll', startIfVisible);
+    window.addEventListener('load', startIfVisible);
+    startIfVisible();
+  });
+</script>
+
+<!-- =========================================================
+     Custom satellite-reticle cursor (desktop / mouse only)
+     ========================================================= -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.documentElement.classList.add('custom-cursor');
+  });
+</script>
+
+<!-- =========================================================
+     GIS quiz logic
+     ========================================================= -->
+<script>
+  const quizData = [
+    { question: 'Which tool in ArcGIS is used to create buffer zones?', options: ['Clip', 'Buffer', 'Merge', 'Dissolve'], correct: 'Buffer' },
+    { question: 'QGIS is an example of:', options: ['Open-source GIS software', 'Commercial GIS software', 'Remote Sensing satellite', 'Database tool'], correct: 'Open-source GIS software' },
+    { question: 'Which software is widely used for satellite image classification?', options: ['ERDAS Imagine', 'AutoCAD', 'MS Excel', 'Photoshop'], correct: 'ERDAS Imagine' },
+    { question: 'Which coordinate system is most suitable for global datasets?', options: ['WGS84', 'UTM', 'Lambert Conformal Conic', 'NAD83'], correct: 'WGS84' },
+    { question: "The 'Clip' tool in GIS is mainly used for:", options: ['Cutting features using a boundary', 'Creating buffer zones', 'Calculating distance', 'Merging layers'], correct: 'Cutting features using a boundary' },
+    { question: 'Raster data represents:', options: ['Points, lines, polygons', 'Continuous surfaces', 'Tabular data', 'Vector networks'], correct: 'Continuous surfaces' }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+  let playerName = '';
+
+  const QUIZ_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbygwg-IL1YwBOKB4cAOIbOfGGJ4tkPPKAz8edgTfriuWx18JsuqflTSKd7gJ7hGzKcCjQ/exec';
+
+  function startQuiz() {
+    const nameInput = document.getElementById('username').value.trim();
+    if (nameInput === '') {
+      alert('Please enter your name!');
+      return;
+    }
+    playerName = nameInput;
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    currentQuestion = 0;
+    score = 0;
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    document.getElementById('feedback').innerHTML = '';
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('nextBtn').style.display = 'none';
+
+    const q = quizData[currentQuestion];
+    document.getElementById('question').innerText = q.question;
+
+    let optionsHtml = '';
+    q.options.forEach((opt, i) => {
+      optionsHtml += `<label><input type="radio" name="option" value="${opt}" id="opt${i}"> ${opt}</label>`;
+    });
+    document.getElementById('options').innerHTML = optionsHtml;
+  }
+
+  function submitAnswer() {
+    const selected = document.querySelector('input[name="option"]:checked');
+    if (!selected) {
+      alert('Please select an option!');
+      return;
+    }
+
+    const answer = selected.value;
+    const correct = quizData[currentQuestion].correct;
+    const feedback = document.getElementById('feedback');
+
+    if (answer === correct) {
+      feedback.innerHTML = '✅ Correct!';
+      feedback.className = 'feedback correct';
+      score++;
+    } else {
+      feedback.innerHTML = `❌ Wrong! Correct answer: ${correct}`;
+      feedback.className = 'feedback wrong';
+    }
+    document.getElementById('nextBtn').style.display = 'inline-block';
+  }
+
+  function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    document.getElementById('quiz').style.display = 'none';
+    let resultText;
+    let level;
+
+    if (score <= 2) { resultText = `${playerName}, you scored ${score}/${quizData.length} → 🌱 Beginner`; level = 'Beginner'; }
+    else if (score <= 4) { resultText = `${playerName}, you scored ${score}/${quizData.length} → 🌍 Intermediate`; level = 'Intermediate'; }
+    else { resultText = `${playerName}, you scored ${score}/${quizData.length} → 🚀 GIS Expert`; level = 'GIS Expert'; }
+
+    document.getElementById('result').innerText = resultText;
+    sendToSheet(level);
+  }
+
+  function sendToSheet(level) {
+    fetch(QUIZ_SHEET_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify({ name: playerName, score: score, level: level }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then((res) => res.json())
+      .then((data) => console.log('تم الإرسال:', data))
+      .catch((err) => console.error('خطأ في الإرسال:', err));
+  }
+</script>
+
+<!-- =========================================================
+     GIS mini-tools logic (coordinate converter / UTM / distance)
+     ========================================================= -->
+<script>
+  function toRad(deg) { return deg * Math.PI / 180; }
+
+  function ddToDms(deg, isLat) {
+    const dir = isLat ? (deg >= 0 ? 'N' : 'S') : (deg >= 0 ? 'E' : 'W');
+    const abs = Math.abs(deg);
+    const d = Math.floor(abs);
+    const minFloat = (abs - d) * 60;
+    const m = Math.floor(minFloat);
+    const s = ((minFloat - m) * 60).toFixed(1);
+    return `${d}°${String(m).padStart(2, '0')}'${s}"${dir}`;
+  }
+
+  function convertDDtoDMS() {
+    const lat = parseFloat(document.getElementById('ddLat').value);
+    const lon = parseFloat(document.getElementById('ddLon').value);
+    const out = document.getElementById('dmsOutput');
+    if (isNaN(lat) || isNaN(lon) || lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+      out.textContent = '⚠️ من فضلك ادخل إحداثيات صحيحة (Lat -90..90 / Lon -180..180)';
+      return;
+    }
+    out.innerHTML = `<strong>${ddToDms(lat, true)}</strong>, <strong>${ddToDms(lon, false)}</strong>`;
+  }
+
+  function convertDMStoDD() {
+    const latStr = document.getElementById('dmsLat').value.trim();
+    const lonStr = document.getElementById('dmsLon').value.trim();
+    const out = document.getElementById('ddOutput');
+    const re = /(\d+)[°\s]+(\d+)['\s]+([\d.]+)["\s]*([NSEW])/i;
+    const latMatch = latStr.match(re);
+    const lonMatch = lonStr.match(re);
+    if (!latMatch || !lonMatch) {
+      out.textContent = '⚠️ الصيغة المطلوبة مثال: 30°02\'39.8"N';
+      return;
+    }
+    const parseOne = (m) => {
+      let dd = parseInt(m[1], 10) + parseInt(m[2], 10) / 60 + parseFloat(m[3]) / 3600;
+      if (/[SW]/i.test(m[4])) dd *= -1;
+      return dd;
+    };
+    const lat = parseOne(latMatch).toFixed(6);
+    const lon = parseOne(lonMatch).toFixed(6);
+    out.innerHTML = `<strong>Lat: ${lat}</strong>, <strong>Lon: ${lon}</strong>`;
+  }
+
+  function findUTMZone() {
+    const lat = parseFloat(document.getElementById('utmLat').value);
+    const lon = parseFloat(document.getElementById('utmLon').value);
+    const out = document.getElementById('utmOutput');
+    if (isNaN(lat) || isNaN(lon) || lat < -80 || lat > 84 || lon < -180 || lon > 180) {
+      out.textContent = '⚠️ من فضلك ادخل إحداثيات صحيحة (UTM يغطي Lat -80..84)';
+      return;
+    }
+    const zone = Math.floor((lon + 180) / 6) + 1;
+    const hemisphere = lat >= 0 ? 'North' : 'South';
+    const epsg = lat >= 0 ? 32600 + zone : 32700 + zone;
+    out.innerHTML = `<strong>Zone ${zone}${lat >= 0 ? 'N' : 'S'}</strong> — ${hemisphere} hemisphere<br>EPSG:${epsg}`;
+  }
+
+  function calcDistance() {
+    const lat1 = parseFloat(document.getElementById('distLat1').value);
+    const lon1 = parseFloat(document.getElementById('distLon1').value);
+    const lat2 = parseFloat(document.getElementById('distLat2').value);
+    const lon2 = parseFloat(document.getElementById('distLon2').value);
+    const out = document.getElementById('distOutput');
+    if ([lat1, lon1, lat2, lon2].some((v) => isNaN(v))) {
+      out.textContent = '⚠️ من فضلك ادخل الإحداثيات الأربعة';
+      return;
+    }
+    const R = 6371;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const km = (R * c).toFixed(2);
+    out.innerHTML = `<strong>${km} km</strong> (${(km * 0.621371).toFixed(2)} miles)`;
+  }
+</script>
+
+<!-- =========================================================
+     "Ask me anything" widget — AI tab (placeholder logic) +
+     Human live-chat tab (placeholder logic).
+     See the accompanying setup notes for what needs to be wired
+     up server-side before this is truly live.
+     ========================================================= -->
+<script>
+  function openDialog() {
+    document.getElementById('dialog-overlay').style.display = 'flex';
+  }
+  function closeDialog() {
+    document.getElementById('dialog-overlay').style.display = 'none';
+  }
+
+  function switchChatTab(tab) {
+    document.getElementById('tabAI').classList.toggle('active', tab === 'ai');
+    document.getElementById('tabHuman').classList.toggle('active', tab === 'human');
+    document.getElementById('paneAI').style.display = tab === 'ai' ? 'block' : 'none';
+    document.getElementById('paneHuman').style.display = tab === 'human' ? 'block' : 'none';
+  }
+
+  function appendMsg(logId, who, text) {
+    const log = document.getElementById(logId);
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble ' + who;
+    bubble.textContent = text;
+    log.appendChild(bubble);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  // AI tab — TODO: replace with a real call to your backend endpoint
+  // (see setup notes). This placeholder just explains that clearly
+  // to any visitor instead of silently pretending to be AI-powered.
+  async function askAI() {
+    const input = document.getElementById('aiInput');
+    const question = input.value.trim();
+    if (!question) return;
+    appendMsg('aiLog', 'user', question);
+    input.value = '';
+
+    appendMsg('aiLog', 'bot', '...');
+    const log = document.getElementById('aiLog');
+    const thinking = log.lastChild;
+
+    try {
+      // const res = await fetch('/api/ask-ai', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ question })
+      // });
+      // const data = await res.json();
+      // thinking.textContent = data.answer;
+      thinking.textContent = 'الرد الذكي مش متوصل بسيرفر لسه — راجع ملاحظات التفعيل اللي بعتهالك عشان توصّله بالـ AI API فعليًا.';
+    } catch (err) {
+      thinking.textContent = '❌ حصل خطأ في الاتصال بالذكاء الاصطناعي.';
+    }
+  }
+
+  // Human live-chat tab — TODO: replace with Firebase (or similar)
+  // realtime listener so replies from Asem appear here live.
+  function sendHumanMessage() {
+    const input = document.getElementById('humanInput');
+    const name = document.getElementById('humanName').value.trim() || 'زائر';
+    const msg = input.value.trim();
+    if (!msg) return;
+    appendMsg('humanLog', 'user', msg);
+    input.value = '';
+    document.getElementById('humanStatus').textContent = 'الشات اللايف لسه محتاج ربط بقاعدة بيانات (Firebase) عشان الرسالة توصل لعاصم فعليًا وترجع لايف — شوف ملاحظات التفعيل.';
+  }
+</script>
+
+<!-- =========================================================
+     Interactive route map (Leaflet + OSRM)
+     ========================================================= -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<script>
+  const map = L.map('map').setView([30.0444, 31.2357], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  let routingControl = null;
+  let startMarker = null;
+  let travelMode = 'car'; // 'car' | 'foot'
+
+  const startIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/149/149059.png', iconSize: [30, 30] });
+  const endIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', iconSize: [30, 30] });
+
+  map.on('click', (e) => {
+    const clickedPoint = e.latlng;
+
+    if (!startMarker) {
+      startMarker = L.marker(clickedPoint, { icon: startIcon }).addTo(map).bindPopup('📍 Start Point').openPopup();
+      return;
+    }
+
+    if (routingControl) map.removeControl(routingControl);
+
+    routingControl = L.Routing.control({
+      waypoints: [startMarker.getLatLng(), clickedPoint],
+      router: L.Routing.osrmv1({
+        serviceUrl: travelMode === 'foot'
+          ? 'https://router.project-osrm.org/route/v1/foot'
+          : 'https://router.project-osrm.org/route/v1'
+      }),
+      addWaypoints: false,
+      draggableWaypoints: false,
+      routeWhileDragging: false,
+      show: false,
+      lineOptions: {
+        styles: [
+          { color: '#000', weight: 8, opacity: 0.25 },
+          { color: '#35d6c4', weight: 5 }
+        ]
+      }
+    })
+      .on('routesfound', (e) => {
+        const route = e.routes[0];
+        const distance = (route.summary.totalDistance / 1000).toFixed(2);
+        const time = Math.round(route.summary.totalTime / 60);
+
+        L.marker(clickedPoint, { icon: endIcon })
+          .addTo(map)
+          .bindPopup(`🏁 Destination<br>📏 Distance: ${distance} km<br>⏱️ Time: ${time} min`)
+          .openPopup();
+      })
+      .addTo(map);
+
+    startMarker = null;
+  });
+
+  function setTravelMode(mode) {
+    travelMode = mode;
+    document.getElementById('modeCar').classList.toggle('active', mode === 'car');
+    document.getElementById('modeFoot').classList.toggle('active', mode === 'foot');
+  }
+</script>
+
+</body>
+</html>
