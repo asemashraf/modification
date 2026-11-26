@@ -21,7 +21,7 @@ button{font-family:inherit;cursor:pointer}
 #title::after{content:"";display:inline-block;width:3px;height:.9em;background:var(--gold2);margin-inline-start:6px;vertical-align:middle;animation:blink 1s steps(1) infinite}
 #title.done::after{display:none}
 @keyframes blink{50%{opacity:0}}
-.sub{z-index:2;color:#e3d9c6;font-size:clamp(14px,1.7vw,24px);opacity:0;transition:opacity 1.2s}
+.sub{z-index:2;color:#e3d9c6;font-size:clamp(14px,1.7vw,24px);opacity:0;transition:opacity 1.2ِs}
 .sub.show{opacity:1}.sub{text-align:center;line-height:1.6}.sub b{display:block;font-weight:700}.sub span{display:block;color:var(--gold2);font-size:.85em}
 #globeWrap{position:relative;flex:1;width:min(100%,62vh);min-height:0;z-index:1}
 #globeWrap canvas{width:100%!important;height:100%!important;display:block}
@@ -111,6 +111,430 @@ table.dt{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;bo
 #lb .x{position:fixed;top:14px;right:18px;z-index:2;font-size:30px;background:var(--gold);color:var(--ink);border:0;border-radius:50%;width:46px;height:46px}
 #lb .tip{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);padding:5px 16px;border-radius:20px;font-size:14px;z-index:2}
 @media(max-width:1000px){.dash{grid-template-columns:1fr;grid-template-rows:auto;height:auto}.mapp{grid-column:1;grid-row:auto}#map{height:340px;flex:none}.cmp{grid-template-columns:1fr}.fig{height:auto}.view#v3{overflow:auto}}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE LAYER
+   إضافات للموبايل فقط — لا تغيّر تنسيق سطح المكتب أو وظائفه
+   ========================================================= */
+@media screen and (max-width: 680px) {
+  html, body {
+    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* الشاشة الافتتاحية */
+  #hero {
+    padding: max(14px, env(safe-area-inset-top)) 5vw max(22px, env(safe-area-inset-bottom));
+    gap: 14px;
+    justify-content: space-around;
+  }
+  .logos {
+    align-items: center;
+    gap: 18px;
+  }
+  .logos img {
+    height: clamp(48px, 13vw, 76px);
+    max-width: 30vw;
+    object-fit: contain;
+  }
+  #title {
+    width: 100%;
+    font-size: clamp(25px, 7vw, 38px);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  .sub {
+    font-size: clamp(13px, 3.8vw, 17px);
+    line-height: 1.8;
+  }
+  #globeWrap {
+    width: min(100%, 43vh);
+    flex: 0 1 43vh;
+    min-height: 150px;
+  }
+  #enter {
+    width: min(92%, 340px);
+    padding: 13px 18px;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  /* الهيدر */
+  #app {
+    min-height: 0;
+  }
+  header {
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px;
+    padding: 9px 12px;
+    padding-top: max(9px, env(safe-area-inset-top));
+  }
+  header img {
+    height: 38px;
+    width: 38px;
+    object-fit: contain;
+  }
+  header h1 {
+    flex: 1 1 calc(100% - 100px);
+    min-width: 0;
+    text-align: center;
+    font-size: clamp(14px, 4vw, 19px);
+    line-height: 1.5;
+  }
+  .crumbs {
+    display: none;
+  }
+  .hbtn {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 7px 9px;
+    font-size: 12px;
+    white-space: nowrap;
+    border-radius: 9px;
+  }
+
+  /* مساحة المحتوى والكروت */
+  main {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .view {
+    padding: 18px 13px max(22px, env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+  h2.vt {
+    font-size: clamp(21px, 6vw, 28px);
+    line-height: 1.45;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+  }
+  .card {
+    width: 100%;
+    min-width: 0;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .co .ic {
+    width: 68px;
+    height: 68px;
+    font-size: 34px;
+    margin-bottom: 10px;
+  }
+  .co h3 {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .co span, .od small {
+    font-size: 14px;
+  }
+  .od .no {
+    font-size: clamp(16px, 4.5vw, 20px);
+    overflow-wrap: anywhere;
+  }
+  .od p {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .loc {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.7;
+    font-size: 13px;
+  }
+  .back {
+    padding: 7px 12px;
+    font-size: 13px;
+    border-radius: 9px;
+  }
+
+  /* شاشة تفاصيل الطلب */
+  .view#v3 {
+    padding: 13px 10px max(20px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  #v3 h2.vt {
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px !important;
+  }
+  #v3t {
+    min-width: 0;
+    flex: 1 1 100%;
+    overflow-wrap: anywhere;
+    font-size: 17px;
+  }
+  .nav {
+    width: 100%;
+    margin-inline-start: 0;
+    justify-content: space-between;
+    gap: 7px;
+    font-size: 13px;
+  }
+  .nb {
+    padding: 8px 11px;
+    font-size: 12px;
+    border-radius: 24px;
+  }
+  #cnt {
+    min-width: 55px;
+    font-size: 13px;
+  }
+  #prog {
+    margin-bottom: 12px;
+  }
+  #detail {
+    height: auto !important;
+    min-height: 0;
+  }
+  .dash {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+  }
+  .dash > .panel {
+    width: 100%;
+    min-width: 0;
+  }
+  .panel {
+    padding: 9px;
+    border-radius: 13px;
+  }
+  .dash > .panel:first-child {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table.dt {
+    width: 100%;
+    min-width: 520px;
+    font-size: 13px;
+  }
+  .dt th {
+    padding: 9px 7px;
+    line-height: 1.5;
+  }
+  .dt td {
+    padding: 9px 7px;
+    line-height: 1.6;
+  }
+  .dt td.ed {
+    font-size: 12px;
+  }
+  .cmp {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .fig {
+    width: 100%;
+    height: auto;
+    min-height: 230px;
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+  }
+  .fig img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .badge {
+    top: 7px;
+    inset-inline: 7px;
+    padding: 6px 8px;
+    gap: 5px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .badge i {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+  .zoomhint {
+    bottom: 6px;
+    left: 6px;
+    padding: 3px 7px;
+    font-size: 10px;
+  }
+  .mapp {
+    display: flex;
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 0;
+  }
+  .mapp .cap {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .mapp .cap span {
+    overflow-wrap: anywhere;
+    font-size: 11px;
+  }
+  #map {
+    width: 100%;
+    height: 270px;
+    min-height: 270px;
+    flex: none;
+  }
+  .nocoord {
+    min-height: 150px;
+    line-height: 1.8;
+    padding: 15px;
+  }
+  .notes {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    gap: 12px;
+    margin-top: 10px !important;
+  }
+  .nt {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.9;
+    padding: 14px 11px;
+  }
+
+  /* المعاينة المكبرة والصورة الكاملة */
+  #zp {
+    top: 8px;
+    width: 94vw;
+    max-height: 70vh;
+    border-radius: 0 0 14px 14px;
+  }
+  #zp .zh {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  #zp .zv {
+    height: min(58vh, 390px);
+  }
+  #lb img {
+    max-width: 96vw;
+    max-height: 82vh;
+  }
+  #lb .x {
+    top: max(10px, env(safe-area-inset-top));
+    right: 10px;
+    width: 42px;
+    height: 42px;
+    font-size: 27px;
+  }
+  #lb .tip {
+    width: calc(100% - 24px);
+    bottom: max(12px, env(safe-area-inset-bottom));
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.7;
+    padding: 7px 10px;
+  }
+}
+
+/* الهواتف الصغيرة جدًا */
+@media screen and (max-width: 380px) {
+  header {
+    gap: 7px;
+    padding-inline: 8px;
+  }
+  header img {
+    width: 33px;
+    height: 33px;
+  }
+  .hbtn {
+    padding: 7px 6px;
+    font-size: 11px;
+  }
+  .view {
+    padding-inline: 10px;
+  }
+  .card {
+    padding: 17px 12px;
+  }
+  .nb {
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+  .fig {
+    min-height: 205px;
+  }
+  #map {
+    height: 245px;
+    min-height: 245px;
+  }
+}
+
+/* الهاتف في الوضع الأفقي */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  #hero {
+    gap: 6px;
+    padding-block: 8px;
+  }
+  .logos img {
+    height: 42px;
+  }
+  #globeWrap {
+    flex-basis: 34vh;
+    width: min(34vh, 42vw);
+  }
+  #enter {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+  header {
+    padding-block: 5px;
+  }
+  header img {
+    height: 30px;
+    width: 30px;
+  }
+  .view#v3 {
+    overflow-y: auto;
+  }
+}
+
+
+/* تحسين لوحة الإحداثيات للموبايل فقط */
+.mobile-map-tools{display:none}
+@media screen and (max-width:680px){
+ .mapp{position:relative;gap:10px;padding:12px!important;background:linear-gradient(155deg,rgba(43,37,28,.98),rgba(20,18,15,.98));border:1px solid rgba(201,161,59,.42);box-shadow:0 10px 28px rgba(0,0,0,.28)}
+ .mapp .cap{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:2px 2px 0}
+ .mapp .cap .map-heading{font-size:15px;font-weight:900;color:var(--gold2);direction:rtl}
+ .mapp .cap .map-coord{display:block;width:100%;padding:10px 12px;border:1px solid rgba(201,161,59,.38);border-radius:10px;background:rgba(0,0,0,.28);color:#fff;font-size:14px;font-weight:800;text-align:center;letter-spacing:.25px;font-variant-numeric:tabular-nums;direction:ltr}
+ .mobile-map-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+ .map-action{min-height:43px;padding:9px 7px;border:1px solid rgba(201,161,59,.48);border-radius:10px;background:linear-gradient(145deg,rgba(201,161,59,.19),rgba(201,161,59,.07));color:#f5e4b7;font-family:inherit;font-size:12px;font-weight:800;line-height:1.35;touch-action:manipulation;cursor:pointer}
+ .map-action:active{transform:scale(.98);background:rgba(201,161,59,.3)}
+ .map-action.expand-map{grid-column:1/-1;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#171411;border-color:transparent}
+ #map{height:clamp(250px,42vh,360px);min-height:250px;border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;touch-action:pan-x pan-y}
+ .mapp.map-expanded{position:fixed!important;inset:8px!important;z-index:99999!important;width:auto!important;height:calc(100dvh - 16px)!important;max-height:calc(100dvh - 16px)!important;overflow:auto!important;padding:12px!important;border:1px solid var(--gold)!important;border-radius:16px!important;box-shadow:0 0 0 9999px rgba(0,0,0,.78),0 18px 55px rgba(0,0,0,.75)!important}
+ .mapp.map-expanded #map{height:58dvh;min-height:260px;flex:1 0 260px}
+ .mapp.map-expanded .mobile-map-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mapp.map-expanded .map-action{min-height:46px}
+ .mapp.map-expanded .map-action.expand-map{grid-column:1/-1}
+ .mapp .leaflet-control-zoom a{width:40px!important;height:40px!important;line-height:40px!important;font-size:22px!important}
+ .mapp .leaflet-control-zoom{margin:10px!important}
+}
+@media screen and (max-width:380px){
+ .mapp .cap .map-coord{font-size:12px;padding:9px 7px}
+ .mobile-map-tools{gap:6px}
+ .map-action{font-size:11px;padding:8px 5px;min-height:42px}
+}
 </style>
 </head>
 <body>
@@ -224,10 +648,11 @@ function openOd(j,dir){state.od=j;const L=DATA[state.co].orders,o=L[j],d=$('deta
    <tr><td class="num">${o.no}</td><td><span class="l">تاريخ الطباعة الأولى</span><span dir="ltr">${o.first.date}</span></td><td><span class="l">تاريخ الطباعة الثانية</span><span dir="ltr">${o.second.date}</span></td></tr>
    ${o.area?`<tr><td><span class="l">المحافظة</span>${o.gov}</td><td colspan="2"><span class="l">الجهة (القسم / المركز)</span>${o.area}</td></tr>`:''}<tr><td colspan="3" class="ed"><span class="l">التعديل</span>${o.edit||'—'}</td></tr></table></div>
    <div class="panel cmp" style="grid-column:1;grid-row:2">${fig(o.first.img,'النسخة الأولى','b1',o.first.date)}${fig(o.second.img,'النسخة الثانية','b2',o.second.date)}</div>
-   <div class="panel mapp"><div class="cap">📍 الموقع على القمر الصناعي <span>${o.coord?o.coord[0].toFixed(6)+' , '+o.coord[1].toFixed(6):''}</span></div>${o.coord?'<div id="map"></div>':'<div class="nocoord">لا توجد إحداثيات مطبوعة في الشهادة</div>'}</div></div>`;
+   <div class="panel mapp"><div class="cap"><strong class="map-heading">📍 الموقع على القمر الصناعي</strong><span class="map-coord">${o.coord?o.coord[0].toFixed(6)+' , '+o.coord[1].toFixed(6):''}</span></div>${o.coord?`<div class="mobile-map-tools" data-lat="${o.coord[0]}" data-lng="${o.coord[1]}"><button type="button" class="map-action copy-coord">نسخ الإحداثيات</button><button type="button" class="map-action open-map">فتح في خرائط Google</button><button type="button" class="map-action expand-map">تكبير الخريطة</button></div><div id="map"></div>`:'<div class="nocoord">لا توجد إحداثيات مطبوعة في الشهادة</div>'}</div></div>`;
   if(o.coord){const pc=lastC;lastC=o.coord;setTimeout(()=>flyMap(o.coord,pc),650)}else lastC=null;
  }
  d.querySelectorAll('.fig').forEach(f=>{f.onclick=()=>openLb(IMG[f.dataset.src]);magnify(f)});
+ const mt=d.querySelector('.mobile-map-tools');if(mt){const lat=Number(mt.dataset.lat),lng=Number(mt.dataset.lng),coord=lat.toFixed(6)+' , '+lng.toFixed(6);const copy=mt.querySelector('.copy-coord'),open=mt.querySelector('.open-map'),expand=mt.querySelector('.expand-map'),panel=mt.closest('.mapp');copy.onclick=async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(coord)}else{const ta=document.createElement('textarea');ta.value=coord;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}copy.textContent='تم نسخ الإحداثيات ✓';setTimeout(()=>copy.textContent='نسخ الإحداثيات',1800)}catch(e){copy.textContent='تعذر النسخ';setTimeout(()=>copy.textContent='نسخ الإحداثيات',1800)}};open.onclick=()=>window.open('https://www.google.com/maps?q='+encodeURIComponent(lat+','+lng),'_blank','noopener');expand.onclick=()=>{const on=panel.classList.toggle('map-expanded');expand.textContent=on?'تصغير الخريطة':'تكبير الخريطة';if(map)setTimeout(()=>map.invalidateSize(),250)}}
  $('v3').scrollTop=0;show(3);scr($('v3t').firstChild);const nm=d.querySelector('td.num');nm&&scr(nm)}
 let lastC=null,busy=false;
 function scr(el){if(!el)return;const t=el.textContent;let f=0;const iv=setInterval(()=>{el.textContent=t.replace(/\d/g,(c,i)=>i<f*t.length/14?c:Math.floor(Math.random()*10));if(++f>14){el.textContent=t;clearInterval(iv)}},35)}
