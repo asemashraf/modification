@@ -192,6 +192,10 @@ h2.vt{flex-wrap:wrap}
 #hero .foot{margin-top:6px;padding:4px 0 0}
 #hero.playing .foot{opacity:0;transition:opacity .5s}
 @media(max-width:700px){.foot{padding:8px 10px 10px}#app .foot{display:none}}
+.rhead{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--gold2) 45%,var(--gold));border:2px solid #fff;box-shadow:0 0 0 0 rgba(230,191,94,.8),0 0 18px 4px rgba(230,191,94,.85);animation:rhp 1s ease-out infinite}
+@keyframes rhp{to{box-shadow:0 0 0 22px rgba(230,191,94,0),0 0 18px 4px rgba(230,191,94,.85)}}
+.pdrop{animation:pdrop .6s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes pdrop{from{transform:translateY(-46px);opacity:0}to{transform:none;opacity:1}}
 </style>
 </head>
 <body>
@@ -372,19 +376,59 @@ function openC(i,dir){cS=i;const c=CMP.items[i],d=$('cdet'),n=CMP.items.length;
  const right=c.imgs.length?`<div class="panel att"><h4 style="color:var(--gold2)">المرفقات (انقر للتكبير)</h4>${c.imgs.map(m=>`<figure data-src="${m.k}"><img src="${IMG[m.k]}" alt=""><figcaption>${m.c}</figcaption></figure>`).join('')}</div>`:'';
  d.innerHTML=`<div class="panel cbanner" style="padding:12px 20px"><span>${c.title||'شكوي بخصوص الطلب'+(c.nos.length>1?'ين':'')+':-'}</span>${c.title?'':c.nos.map(x=>`<span class="chip">${x}</span>`).join('')}<span>شركة: ${c.co}</span></div><div class="cgrid"><div>${left}</div>${right}</div>`;
  d.querySelectorAll('figure').forEach(f=>f.onclick=()=>openLb(IMG[f.dataset.src]));
- $('v5').scrollTop=0;show(5);scr($('v5t').firstChild)}
+ $('v5').scrollTop=0;show(5);scr($('v5t').firstChild);d.querySelectorAll('.chip').forEach(x=>scr(x))}
 function cgo(s){const n=cS+s;if(cbusy||n<0||n>=CMP.items.length)return;cbusy=true;$('cdet').className=s>0?'leave-n':'leave-p';setTimeout(()=>{openC(n,s);cbusy=false},290)}
 $('cnxt').onclick=()=>cgo(1);$('cprv').onclick=()=>cgo(-1);$('cb4').onclick=()=>show(1);$('cb5').onclick=()=>show(4);
 let lastC=null,busy=false;
 function scr(el){if(!el)return;const t=el.textContent;let f=0;const iv=setInterval(()=>{el.textContent=t.replace(/\d/g,(c,i)=>i<f*t.length/14?c:Math.floor(Math.random()*10));if(++f>14){el.textContent=t;clearInterval(iv)}},35)}
 function go(s){const L=DATA[state.co].orders,n=state.od+s;if(busy||n<0||n>=L.length)return;busy=true;const d=$('detail');d.className=s>0?'leave-n':'leave-p';setTimeout(()=>{openOd(n,s);busy=false},290)}
 $('nxt').onclick=()=>go(1);$('prv').onclick=()=>go(-1);
-function flyMap(c,from){if(!window.L)return;if(map){map.remove()}
- map=L.map('map',{zoomControl:true,attributionControl:false,zoomSnap:.5}).setView(from||[26.8,30.0],from?15:5);
- L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,maxNativeZoom:19}).addTo(map);
- L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,opacity:.8}).addTo(map);
- L.marker(c,{icon:L.divIcon({className:'',html:'<div class="pin"></div>',iconSize:[26,26],iconAnchor:[13,26]})}).addTo(map);
- map.invalidateSize();setTimeout(()=>map.flyTo(c,18,{duration:3.2}),350)}
+/* ---------- انتقال بالمسار من لوكيشن للتاني (طرق حقيقية OSRM + بديل منحني) ---------- */
+let RT=0;
+const PINI=()=>L.divIcon({className:'',html:'<div class="pin"></div>',iconSize:[26,26],iconAnchor:[13,26]});
+function arcPts(A,B){const P=L.CRS.EPSG3857,pa=P.project(A),pb=P.project(B),N=180,pts=[];
+ let px=-(pb.y-pa.y)*.2,py=(pb.x-pa.x)*.2;if(py<0){px=-px;py=-py}
+ const cx=(pa.x+pb.x)/2+px,cy=(pa.y+pb.y)/2+py;
+ for(let i=0;i<=N;i++){const t=i/N,u=1-t;pts.push(P.unproject(L.point(u*u*pa.x+2*u*t*cx+t*t*pb.x,u*u*pa.y+2*u*t*cy+t*t*pb.y)))}
+ return pts}
+function roadPts(A,B){const ac=window.AbortController?new AbortController():null,tm=setTimeout(()=>ac&&ac.abort(),6000);
+ return fetch('https://router.project-osrm.org/route/v1/driving/'+A.lng+','+A.lat+';'+B.lng+','+B.lat+'?overview=full&geometries=geojson',ac?{signal:ac.signal}:{})
+ .then(r=>r.json()).then(j=>{clearTimeout(tm);const g=j.routes&&j.routes[0]&&j.routes[0].geometry.coordinates;if(!g||g.length<2)throw 0;
+  let p=g.map(q=>L.latLng(q[1],q[0]));
+  if(p.length>1500){const k=Math.ceil(p.length/1500),q=p.filter((_,i)=>i%k===0);if(q[q.length-1]!==p[p.length-1])q.push(p[p.length-1]);p=q}
+  p.unshift(A);p.push(B);return p})
+ .catch(()=>{clearTimeout(tm);return arcPts(A,B)})}
+function flyMap(c,from){if(!window.L||!document.getElementById('map'))return;if(map){map.remove()}
+ const tok=++RT,near=!!from&&L.latLng(from).distanceTo(L.latLng(c))>40;
+ const M=map=L.map('map',{zoomControl:true,attributionControl:false,zoomSnap:.5}).setView(from||[26.8,30.0],from?(near?18:15):5);
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,maxNativeZoom:19}).addTo(M);
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,opacity:.8}).addTo(M);
+ const live=()=>tok===RT&&map===M&&document.body.contains(M.getContainer());
+ const guard=f=>(...a)=>{if(!live())return;try{f(...a)}catch(e){}};
+ const arrive=()=>{L.marker(c,{icon:L.divIcon({className:'',html:'<div class="pdrop"><div class="pin"></div></div>',iconSize:[26,26],iconAnchor:[13,26]})}).addTo(M)};
+ M.invalidateSize();
+ if(!near){L.marker(c,{icon:PINI()}).addTo(M);setTimeout(()=>M.flyTo(c,18,{duration:3.2}),350);return}
+ const A=L.latLng(from),B=L.latLng(c);
+ L.marker(A,{icon:PINI(),interactive:false}).addTo(M);
+ const t00=Date.now();
+ const draw=pts=>{
+  const n=pts.length,cum=[0];for(let i=1;i<n;i++)cum.push(cum[i-1]+pts[i-1].distanceTo(pts[i]));
+  const total=cum[n-1]||1,dur=Math.min(5000,Math.max(2200,1600+total/1000*7));
+  L.polyline(pts,{color:'#fff',weight:2,opacity:.5,dashArray:'3 9',interactive:false}).addTo(M);
+  const glow=L.polyline([pts[0]],{color:'#e6bf5e',weight:11,opacity:.28,lineCap:'round',lineJoin:'round',interactive:false}).addTo(M),
+        line=L.polyline([pts[0]],{color:'#e6bf5e',weight:4,opacity:1,lineCap:'round',lineJoin:'round',interactive:false}).addTo(M),
+        head=L.marker(A,{icon:L.divIcon({className:'',html:'<div class="rhead"></div>',iconSize:[20,20],iconAnchor:[10,10]}),interactive:false,zIndexOffset:900}).addTo(M);
+  const t0=performance.now(),ez=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+  (function step(now){if(!live())return;
+   try{const p=Math.min(1,(now-t0)/dur),d=ez(p)*total;let lo=0,hi=n-1;while(hi-lo>1){const m=(lo+hi)>>1;if(cum[m]<=d)lo=m;else hi=m}
+    const seg0=cum[hi]-cum[lo]||1,r=Math.min(1,Math.max(0,(d-cum[lo])/seg0)),a=pts[lo],b=pts[hi],cur=p>=1?pts[n-1]:L.latLng(a.lat+(b.lat-a.lat)*r,a.lng+(b.lng-a.lng)*r),seg=pts.slice(0,lo+1).concat([cur]);
+    glow.setLatLngs(seg);line.setLatLngs(seg);head.setLatLng(cur);
+    if(p<1){requestAnimationFrame(step);return}
+   }catch(e){}
+   setTimeout(guard(()=>{M.removeLayer(head);arrive();setTimeout(guard(()=>M.flyTo(c,18,{duration:3.2})),420)}),120)})(t0)};
+ roadPts(A,B).then(pts=>setTimeout(guard(()=>{
+  M.invalidateSize();M.flyToBounds(L.latLngBounds(pts),{padding:[70,70],maxZoom:16,duration:1.5});
+  setTimeout(guard(()=>draw(pts)),1700)}),Math.max(0,450-(Date.now()-t00))))}
 
 /* ---------- معاينة مكبرة منسدلة (لا تغطي الشهادة) ---------- */
 let ZZ=3.6;
