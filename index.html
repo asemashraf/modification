@@ -278,7 +278,7 @@ const $=id=>document.getElementById(id);
  const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,out3=x=>1-Math.pow(1-x,3),TAU=Math.PI*2,WMAX=16,rnd=()=>Math.random()-.5;
  let T=null,done=null,landed=false,fin=false,last=0,yC=0,tot=0,x0=0,L0=0;
  window.playIntro=cb=>{if(T!==null)return;done=cb;T=performance.now();hero.classList.add('playing')};
- window.resetGlobe=()=>{T=null;landed=fin=false;cam.position.set(0,0,3.6);globe.position.set(0,0,0);mat.emissive.setRGB(0,0,0);halo.scale.setScalar(1);shock.material.opacity=0;wrap.style.transition='none';wrap.style.transform='';hero.classList.remove('playing');hero.style.transform='';hero.style.transition=''};
+ window.resetGlobe=()=>{T=null;landed=fin=false;last=performance.now();cam.position.set(0,0,3.6);cam.fov=36;cam.updateProjectionMatrix();globe.position.set(0,0,0);globe.visible=true;pin.visible=true;grp.rotation.set(.25,-Math.atan2(P.x,P.z),0);mat.emissive.setRGB(0,0,0);mat.emissiveIntensity=1;mat.color.setRGB(1,1,1);mat.needsUpdate=true;halo.scale.setScalar(1);shock.scale.setScalar(1);shock.material.opacity=0;wrap.style.transition='none';wrap.style.transform='';wrap.offsetWidth;hero.classList.remove('playing');hero.style.transform='';hero.style.transition='';size();ren.render(scene,cam)};
  (function loop(t){requestAnimationFrame(loop);if(hero.classList.contains('out'))return;const dt=Math.min(.05,Math.max(0,(t-last)/1000));last=t;
   if(T===null){grp.rotation.y+=.21*dt}
   else{const e=t-T;
